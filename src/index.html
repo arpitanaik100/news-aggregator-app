@@ -4,16 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>News Aggregator</title>
+  <link rel="stylesheet" href="styles/index.css"/>
+  
 </head>
 <body>
-  <h1 class="site-title">News Aggregator</h1>
+ <h1 class="site-title">News Aggregator</h1>
+
   
   <div class="search-container">
     <input type="text" name="search" id="search" placeholder="Type and press enter to search..." />
   </div>
 
-  <ul id="news-articles">
-
+  <ul class="article" id="news-articles">
+    <li class="article-img"></li>
+    <li class="article-title"></li>
+    <li class="article-description"></li>
+    <li class="article-author"></li>
+    <li class="article-link"></li>
   </ul>
+
+  <script src="scripts/index.js"></script>
 </body>
 </html>
+
+
