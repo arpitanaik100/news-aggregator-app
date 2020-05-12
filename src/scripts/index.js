@@ -10,9 +10,9 @@ function getNews(news){
         `<section class="container">
           <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
           <div class="img_area">
-          <img src="${ind.urlToImage}"class="article-img" alt="${ind.title}"></img>
+          <img src="${ind.urlToImage}"class="article-img" alt="${ind.title}">
           </div><br><br>
-          <h2 class="article-title">${ind.title}</h2><br><br>
+          <div class="article-title">${ind.title}</div><br><br>
           <p class="article-description">${ind.description || "Description not available"}</p><br><br>
           <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
           </a>
@@ -24,7 +24,7 @@ function getNews(news){
   }
   else
   { 
-    article_area.innerHTML='<div class="not-found">No article was found based on the search.</div>';
+    article_area.innerHTML='<h1 class="not-found">No article was found based on the search.</h1>';
   }
 };
 // Function to retreive news using Fetch API with Await//
