@@ -1,9 +1,10 @@
 // Lite Mode/Dark Mode Toggle Function//
-document.querySelector("#toggle_action").addEventListener('change',toggle_func)
+document
+    .querySelector("#toggle_action")
+    .addEventListener('change',toggle_func);
 
 function toggle_func(e){
-  if (e.target.checked)
-   {
+  if (e.target.checked) {
     document.documentElement.setAttribute('data-theme', 'lite');
     document.querySelector(".toggletxt").innerHTML="Toggle to Dark Mode";
     }
@@ -15,37 +16,43 @@ else
 }
 
 //Api-Key//
-const apikey="37f0ab851d10435fb011a17f8db5f4e9";
-var article_area=document.getElementById("news-articles");
+const apikey = "37f0ab851d10435fb011a17f8db5f4e9";
+let article_area = document.getElementById("news-articles");
 //Function to have formatted NEWS//
 function getNews(news){
   let output="";
-  if(news.totalResults>0){
-    news.articles.forEach(ind=>{
-      output+= 
-        ` <section class="container">
-          <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
+  if(news.totalResults > 0){
+    news.articles.forEach((ind) => {
+      output+= ` <section class="container">
+          <li class="article"><a class="article-link" href="${
+            ind.url
+          }" target="_blank">
           <div class="img_area">
-          <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
+          <img src="${ind.urlToImage}" class="article-img" alt="${
+            ind.title
+          }"></img>
           </div>
+          <p class="article-description">${
+            ind.description || "Description not available"
+          }</p> <br>
           <h2 class="article-title">${ind.title}</h2>
-          <p class="article-description">${ind.description || "Description not available"}</p> <br>
-          <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
+          <span class="article-author">-${
+            ind.author? ind.author: "Anon"
+          }</span><br>
           </a>
           </li>
-          </section>
-        `;
+          </section>`;
     });
     article_area.innerHTML=output;
   }
   else
   { 
-    article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
+    article_area.innerHTML='<li> <h3 class="not-found">No article was found based on the search.</h3></li>';
   }
 };
 // Function to retreive news using Fetch API with Await//
 async function retreive(searchValueText=""){
-
+    let url;
     article_area.innerHTML='<p class="load">News are Loading...</p>';
     
     if(searchValueText!=""){
@@ -55,8 +62,8 @@ async function retreive(searchValueText=""){
     {
       url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=${apikey}`;
     }
-    const response=await fetch(url);
-    const result=await response.json();
+    const response = await fetch(url);
+    const result = await response.json();
     getNews(result);
 }
 //Get text value from Searchbar and pass to retreive function//
@@ -65,13 +72,13 @@ async function searchvalue(e){
      {
       retreive(e.target.value);
      }
-};
+}
 //Attached Event listener for Searchbar to retreive text from Searchbar//
 function start(){
   document.getElementById("search").addEventListener('keypress',searchvalue);
   retreive();
 }
 //Initializing Function//
-(function(){
-  start();}
-)();
+(function () {
+  start();
+})();
