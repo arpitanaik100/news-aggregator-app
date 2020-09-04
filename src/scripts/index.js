@@ -1,3 +1,19 @@
+// Lite Mode/Dark Mode Toggle Function//
+document.querySelector("#toggle_action").addEventListener('change',toggle_func)
+
+function toggle_func(e){
+  if (e.target.checked)
+   {
+    document.documentElement.setAttribute('data-theme', 'lite');
+    document.querySelector(".toggletxt").innerHTML="Toggle to Dark Mode";
+    }
+else
+   {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.querySelector(".toggletxt").innerHTML="Toggle to Lite Mode";
+   }   
+}
+
 //Api-Key//
 const apikey="37f0ab851d10435fb011a17f8db5f4e9";
 var article_area=document.getElementById("news-articles");
@@ -7,13 +23,13 @@ function getNews(news){
   if(news.totalResults>0){
     news.articles.forEach(ind=>{
       output+= 
-        `<section class="container">
+        ` <section class="container">
           <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
           <div class="img_area">
-          <img src="${ind.urlToImage}"class="article-img" alt="${ind.title}">
-          </div><br><br>
-          <div class="article-title">${ind.title}</div><br><br>
-          <p class="article-description">${ind.description || "Description not available"}</p><br><br>
+          <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
+          </div>
+          <h2 class="article-title">${ind.title}</h2>
+          <p class="article-description">${ind.description || "Description not available"}</p> <br>
           <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
           </a>
           </li>
@@ -24,13 +40,13 @@ function getNews(news){
   }
   else
   { 
-    article_area.innerHTML='<h1 class="not-found">No article was found based on the search.</h1>';
+    article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
   }
 };
 // Function to retreive news using Fetch API with Await//
 async function retreive(searchValueText=""){
 
-    article_area.innerHTML='<p class="article-description">News are Loading...</p>';
+    article_area.innerHTML='<p class="load">News are Loading...</p>';
     
     if(searchValueText!=""){
       url=`https://newsapi.org/v2/everything?q=${searchValueText}&apiKey=${apikey}`;
